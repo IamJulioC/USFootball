@@ -1,5 +1,13 @@
-GET http:localhost:5298/
+GET http:localhost:5059/teams
 
 ###
 
-POST http:localhost:5298/
+GET http:localhost:5059/teams/2
+
+###
+
+POST http:localhost:5059/teams
+
+### 
+
+PUT http:localhost:5059/teams/2
