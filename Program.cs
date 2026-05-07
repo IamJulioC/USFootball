@@ -54,4 +54,15 @@ app.MapPatch("/teams/{id}", async (int id, AppDbContext db, Team updatedFields) 
     return Results.Ok($"Time {team.Nome} atualizado com sucesso");
 });
 
+app.MapDelete("/teams/{id}", async (int id, AppDbContext db) =>
+{
+    var team = await db.Teams.FindAsync(id);
+    if (team is null) return Results.NotFound("Time não encontrado");
+
+    db.Teams.Remove(team);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+
+});
+
 app.Run();
