@@ -3,12 +3,24 @@ using USFootball;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source= teams.db"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors();
 
 if (app.Environment.IsDevelopment())
 {
